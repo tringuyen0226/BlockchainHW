@@ -1,4 +1,4 @@
-const {Blockchain, Transaction} =  require('./blockchain');
+const {Blockchain, Block ,Transaction} =  require('./blockchain');
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
 
@@ -16,6 +16,8 @@ let wallet = new Blockchain();
 // console.log(JSON.stringify(wallet,null,4));
 
 //Test valid chain
+// wallet.addBlock(new Block(1,"24/05/2020",{amount: 4}));
+// wallet.addBlock(new Block(2,"25/07/2020",{amount: 10}));
 // console.log('Is valid blockchain ?' + wallet.isChainValid());
 
 // wallet.chain[1].data = {amount: 100};
@@ -45,15 +47,15 @@ let wallet = new Blockchain();
 // console.log('\n Balance of Tri is ', wallet.getBalanceOfAddress('tri-address'));
 
 //Test sign transaction
-const tx1 = new Transaction(myWalletAddress, 'public key goes here',10);
-tx1.signTransaction(myKey);
-wallet.addTransaction(tx1);
+// const tx1 = new Transaction(myWalletAddress, 'public key goes here',10);
+// tx1.signTransaction(myKey);
+// wallet.addTransaction(tx1);
 
-console.log('\n Starting the miner....');
-wallet.minePendingTransactions(myWalletAddress);
+// console.log('\n Starting the miner....');
+// wallet.minePendingTransactions(myWalletAddress);
 
-console.log('\n Balance of Tri is ', wallet.getBalanceOfAddress(myWalletAddress));
-console.log('Is valid chain',  wallet.isChainValid());  
+// console.log('\n Balance of Tri is ', wallet.getBalanceOfAddress(myWalletAddress));
+// console.log('Is valid chain',  wallet.isChainValid());  
 
 
 

@@ -37,22 +37,24 @@ class Transaction {
 }
 
 class Block {
-    // constructor(index, timestamp, data, previousHash = '') {
-    //     this.index = index;
+    constructor(index, timestamp, data, previousHash, transactions = '') {
+        this.index = index;
+        this.timestamp = timestamp;
+        this.data = data;
+        this.previousHash = previousHash;
+        this.hash = this.calculateHash();
+        this.nonce = 0;
+        this.transactions = transactions;
+
+    }
+
+    // constructor(timestamp, transactions, previousHash = '') {
     //     this.timestamp = timestamp;
-    //     this.data = data;
     //     this.previousHash = previousHash;
+    //     this.transactions = transactions;
     //     this.hash = this.calculateHash();
     //     this.nonce = 0;
     // }
-
-    constructor(timestamp, transactions, previousHash = '') {
-        this.timestamp = timestamp;
-        this.previousHash = previousHash;
-        this.transactions = transactions;
-        this.hash = this.calculateHash();
-        this.nonce = 0;
-    }
 
 
     calculateHash() {
@@ -186,3 +188,4 @@ class Blockchain {
 
 module.exports.Blockchain = Blockchain;
 module.exports.Transaction = Transaction;
+module.exports.Block = Block;
