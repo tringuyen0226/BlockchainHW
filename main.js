@@ -7,10 +7,20 @@ class Block {
         this.data = data;
         this.previousHash = previousHash;
         this.hash = this.calculateHash();
+        this.nonce = 0;
     }
 
     calculateHash() {
-        return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
+        return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
+    }
+
+    mineBlock(difficulty) {
+        while(this.hash.substring(0,difficulty)!== Array(difficulty + 1).join("0")) {
+            this.nonce++;
+            this.hash = this.calculateHash();
+        }
+
+        console.log('Block mined: ' + this.hash )   ;
     }
 
 }
@@ -19,10 +29,11 @@ class Blockchain {
 
     constructor() {
         this.chain = [this.createFirstBlock()];
+        this.difficulty = 4;
     }
 
     createFirstBlock() {
-        return new Block(0,'25/05/2020','First Block','0');
+        return new Block(0,'24/05/2020','First Block','0');
     }
 
     getLatestBlock() {
@@ -31,7 +42,8 @@ class Blockchain {
 
     addBlock(newBlock) {
         newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.hash = newBlock.calculateHash();
+        // newBlock.hash = newBlock.calculateHash();
+        newBlock.mineBlock(this.difficulty);
         this.chain.push(newBlock);
     }
 
@@ -57,14 +69,25 @@ class Blockchain {
 }
 
 let wallet = new Blockchain();
-wallet.addBlock(new Block(1,"24/05/2020",{amount: 4}));
-wallet.addBlock(new Block(2,"25/07/2020",{amount: 10}));
 
-console.log('Is valid blockchain ?' + wallet.isChainValid());
 
-wallet.chain[1].data = {amount: 100};
-wallet.chain[1].hash = wallet.chain[1].calculateHash();
+//Test create block chain
 
-console.log('Is valid blockchain ?' + wallet.isChainValid());
+// wallet.addBlock(new Block(1,"24/05/2020",{amount: 4}));
+// wallet.addBlock(new Block(2,"25/07/2020",{amount: 10}));
 
 // console.log(JSON.stringify(wallet,null,4));
+
+//Test valid chain
+// console.log('Is valid blockchain ?' + wallet.isChainValid());
+
+// wallet.chain[1].data = {amount: 100};
+// wallet.chain[1].hash = wallet.chain[1].calculateHash();
+
+// console.log('Is valid blockchain ?' + wallet.isChainValid());
+
+console.log('Mining block 1...');
+wallet.addBlock(new Block(1,"24/05/2020",{amount: 1}));
+
+console.log('Mining block 2...');
+wallet.addBlock(new Block(2,"25/07/2020",{amount: 2}));
