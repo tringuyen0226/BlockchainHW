@@ -47,15 +47,15 @@ let wallet = new Blockchain();
 // console.log('\n Balance of Tri is ', wallet.getBalanceOfAddress('tri-address'));
 
 //Test sign transaction
-// const tx1 = new Transaction(myWalletAddress, 'public key goes here',10);
-// tx1.signTransaction(myKey);
-// wallet.addTransaction(tx1);
+const tx1 = new Transaction(myWalletAddress, 'public key goes here',10);
+tx1.signTransaction(myKey);
+wallet.addTransaction(tx1);
 
-// console.log('\n Starting the miner....');
-// wallet.minePendingTransactions(myWalletAddress);
+console.log('\n Starting the miner....');
+wallet.minePendingTransactions(myWalletAddress);
 
-// console.log('\n Balance of Tri is ', wallet.getBalanceOfAddress(myWalletAddress));
-// console.log('Is valid chain',  wallet.isChainValid());  
+console.log('\n Balance of Tri is ', wallet.getBalanceOfAddress(myWalletAddress));
+console.log('Is valid chain',  wallet.isChainValid());  
 
 
 
