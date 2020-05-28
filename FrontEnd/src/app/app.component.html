@@ -1,0 +1,31 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/">
+    <img src="assets/img/block-icon.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+    &nbsp;Blockchain wallet demo
+  </a>
+
+  <div>
+    <button routerLink="/new/transaction/pending" class="btn btn-outline-light" *ngIf="thereArePendingTransactions()">
+      Pending transactions
+      <span class="badge badge-light">{{blockchain.pendingTransactions.length}}</span>
+    </button>
+    &nbsp;
+    <button routerLink="/settings" class="btn btn-outline-light">
+      Settings
+    </button>
+    &nbsp;
+    <button routerLink="/new/transaction" class="btn btn-outline-light">
+      Transfer
+    </button>
+  </div>
+</nav>
+
+<br>
+
+
+<router-outlet></router-outlet>
+
+<footer class="text-muted text-center" style="margin-top: 150px;">
+  <small>1612722 - Nguyễn Thanh Trí<br>
+  <a href="" target="_blank"></a></small>
+</footer>
